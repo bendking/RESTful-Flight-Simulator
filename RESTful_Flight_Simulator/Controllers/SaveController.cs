@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace RESTful_Flight_Simulator.Controllers
 {
-    public class DirectorController : Controller
+    public class SaveController : Controller
     {
-        // GET: Director
+        // GET: Save
         public ActionResult Index()
         {
             return View();

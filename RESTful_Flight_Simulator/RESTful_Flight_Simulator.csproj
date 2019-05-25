@@ -94,7 +94,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DirectorController.cs" />
+    <Compile Include="Controllers\DisplayController.cs" />
+    <Compile Include="Controllers\SaveController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -112,7 +113,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Director\" />
+    <Folder Include="Views\Display\" />
+    <Folder Include="Views\Save\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
