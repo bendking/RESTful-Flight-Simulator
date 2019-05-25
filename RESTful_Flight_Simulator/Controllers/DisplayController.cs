@@ -6,10 +6,22 @@ using System.Web.Mvc;
 
 namespace RESTful_Flight_Simulator.Controllers
 {
-    public class DisplayController : Controller
+    public class displayController : Controller
     {
-        // GET: Direction
-        public ActionResult Index()
+        // GET
+        public ActionResult DisplayLocation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult DisplayLiveRoute()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult DisplaySavedRoute()
         {
             return View();
         }

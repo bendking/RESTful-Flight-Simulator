@@ -6,12 +6,13 @@ using System.Web.Mvc;
 
 namespace RESTful_Flight_Simulator.Controllers
 {
-    public class SaveController : Controller
+    public class saveController : Controller
     {
         // GET: Save
-        public ActionResult Index()
+        public ActionResult SaveRoute()
         {
-            return View();
+            // TODO: Save route - 4 times per second, for 10 seconds
+            return View(); // Should return nothing
         }
     }
 }
