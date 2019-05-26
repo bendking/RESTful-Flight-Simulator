@@ -9,6 +9,7 @@ namespace RESTful_Flight_Simulator.Models
         private IPEndPoint ep;
         private TcpClient client;
         private StreamWriter writer = null;
+        private StreamReader reader = null;
         private static CommandClient commandClientSingleton = null;
         private string ip;
         private int port;
@@ -85,6 +86,7 @@ namespace RESTful_Flight_Simulator.Models
             // DEBUG
             System.Diagnostics.Debug.WriteLine("Client connected.");
             writer = new StreamWriter(client.GetStream());
+            reader = new StreamReader(client.GetStream());
         }
 
 
@@ -95,6 +97,16 @@ namespace RESTful_Flight_Simulator.Models
             System.Diagnostics.Debug.WriteLine(msg);
             writer.Write(msg + "\r\n");
             writer.Flush();
+        }
+
+        public string Get() {
+            return reader.ReadLine();
+        }
+
+        public string SendAndGet(string msg)
+        {
+            Send(msg);
+            return Get();
         }
 
         public void Close()
