@@ -16,6 +16,7 @@ namespace RESTful_Flight_Simulator.Models
             this.cols = cols;
 
             // Hardcoded
+            requests = new string[2];
             requests[0] = "get /position/longitude-deg";
             requests[1] = "get /position/latitude-deg";
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RESTful_Flight_Simulator.Models;
 
 namespace RESTful_Flight_Simulator.Controllers
 {
@@ -11,8 +12,8 @@ namespace RESTful_Flight_Simulator.Controllers
         // GET: Save
         public ActionResult SaveRoute()
         {
-            // TODO: Save route - 4 times per second, for 10 seconds
-            return View(); // Should return nothing
+            saveModel model = new saveModel();
+            return View(model);
         }
     }
 }

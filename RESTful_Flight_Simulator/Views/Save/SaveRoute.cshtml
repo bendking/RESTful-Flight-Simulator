@@ -1,7 +1,44 @@
-﻿
+﻿@model RESTful_Flight_Simulator.Models.saveModel
 @{
     ViewBag.Title = "SaveRoute";
 }
 
-<h2>Saving route...</h2>
+<html>
+<head>
+    <script type="text/javascript" language="javascript">
+        function showDataMined()
+        {
+            var body = document.body
+            var list = document.createElement('ul');
+
+            // Get data mined & parse it
+            var dataStr = (string) @Model.dataMined;
+            var dataPoints = dataStr.split(' ');
+
+            // Insert list to DOM
+            var length = dataPoints.length;
+            for (var i = 0; i < length; i++)
+            {
+                var li = document.createElement('li');
+                li.innerHTML = dataPoints[i];
+                list.appendChild(li);
+            }
+
+            // Build title for list
+            var title = document.createElement('h3');
+            title.innerHTML = "Data mined:";
+
+            // Finally, append title and table to body
+            body.appendChild(document.createElement('hr'));
+            body.appendChild(title);
+            body.appendChild(list);  
+        }
+    </script>
+</head>
+<body>
+    <h2>Saving route...</h2>
+</body>
+</html>
+
+
 
