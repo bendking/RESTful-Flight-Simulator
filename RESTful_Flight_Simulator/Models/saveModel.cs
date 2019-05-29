@@ -20,6 +20,7 @@ namespace RESTful_Flight_Simulator.Models
 
         public void SaveRoute()
         {
+            Debug.WriteLine("Saving route...");
             // Mine and retrieve data
             miner.Mine();
             double[][] data = miner.GetData();

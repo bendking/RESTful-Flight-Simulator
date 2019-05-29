@@ -9,10 +9,12 @@
         function showDataMined()
         {
             var body = document.body
+            var div = document.createElement('div');
             var list = document.createElement('ul');
+            div.style = "margin-left: 20%; margin-top: 15px";
 
             // Get data mined & parse it
-            var dataStr = (string) @Model.dataMined;
+            var dataStr = "@Model.dataMined";
             var dataPoints = dataStr.split(' ');
 
             // Insert list to DOM
@@ -28,16 +30,19 @@
             var title = document.createElement('h3');
             title.innerHTML = "Data mined:";
 
-            // Finally, append title and table to body
+            // Finally, append elements
             body.appendChild(document.createElement('hr'));
-            body.appendChild(title);
-            body.appendChild(list);
+            // Append title and list to div
+            div.appendChild(title);
+            div.appendChild(list);
+            // Append div to body
+            body.appendChild(div);
         }
 
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-
+        
         async function checkDataReady()
         {
             var ready = @Json.Encode(Model.dataReady);
@@ -45,7 +50,6 @@
                 console.log(ready);
                 console.log("Sleeping");
                 await sleep(3000);
-                console.log(@Json.Encode(Model.dataReady));
                 ready =  @Json.Encode(Model.dataReady);
             }
             // When data is ready

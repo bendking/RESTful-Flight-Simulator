@@ -14,7 +14,7 @@ namespace RESTful_Flight_Simulator.Models
         // Timer
         private static System.Timers.Timer timer;
         private int timerCounter;
-        private int counterLimit;
+        private int timerLimit;
         // Data
         private bool save;
         private double[][] data;
@@ -51,7 +51,7 @@ namespace RESTful_Flight_Simulator.Models
 
             // Reset timer counters 
             timerCounter = 0;
-            counterLimit = logs;
+            timerLimit = logs;
 
             // Initialize listeners
             tickListeners = new List<Action<double[]>>();
@@ -90,14 +90,12 @@ namespace RESTful_Flight_Simulator.Models
         private void Tick(Object source, ElapsedEventArgs e)
         {
             // Update timer counter
-            if (timerCounter < counterLimit)
+            if (timerCounter < timerLimit)
             {
                 // Get location date and insert into data
                 double[] locationData = requester.RequestData();
                 // DEBUG
-                Debug.Write(locationData[0]);
-                Debug.Write(',');
-                Debug.WriteLine(locationData[1]);
+                Debug.WriteLine(locationData[0].ToString() + "," + locationData[1].ToString() + ',' + timerCounter.ToString() + ',' + timerLimit.ToString());
                 // Save data if neccessary
                 if (save) { data[timerCounter] = locationData; }
                 // Notify tick listeners

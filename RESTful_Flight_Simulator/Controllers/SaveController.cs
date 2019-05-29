@@ -14,11 +14,16 @@ namespace RESTful_Flight_Simulator.Controllers
         public ActionResult SaveRoute()
         {
             saveModel model = new saveModel();
-            // Start saving route
+            // Save route
+            model.SaveRoute();
+            // Show view
+            return View(model);
+
+            /* What would be proper... (before return)
+            // Save route in the background
             Thread thread = new Thread(model.SaveRoute);
             thread.Start();
-            // Return view
-            return View(model);
+            */
         }
     }
 }
