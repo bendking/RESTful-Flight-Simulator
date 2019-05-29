@@ -43,6 +43,7 @@ namespace RESTful_Flight_Simulator
             // Hardcoded routes
             //
 
+            /*
             // Display current location of plane
             routes.MapRoute(
                 name: "Dot",
@@ -63,6 +64,7 @@ namespace RESTful_Flight_Simulator
                 url: "{controller}/127.0.0.1/5400/4/10/flight1",
                 defaults: new { controller = "save", action = "SaveRoute" }
             );
+            */
         }
     }
 }

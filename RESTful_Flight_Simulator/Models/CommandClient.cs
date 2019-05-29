@@ -85,17 +85,15 @@ namespace RESTful_Flight_Simulator.Models
             client.Connect(ep);
             // DEBUG
             System.Diagnostics.Debug.WriteLine("Client connected.");
+            // Assign writer and reader
             writer = new StreamWriter(client.GetStream());
             reader = new StreamReader(client.GetStream());
         }
 
-
-
         public void Send(string msg)
         {
             if (!connected) return;
-            System.Diagnostics.Debug.WriteLine(msg);
-            writer.Write(msg + "\r\n");
+            writer.WriteLine(msg);
             writer.Flush();
         }
 

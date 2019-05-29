@@ -33,6 +33,27 @@
             body.appendChild(title);
             body.appendChild(list);
         }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function checkDataReady()
+        {
+            var ready = @Json.Encode(Model.dataReady);
+            while (ready != true) {
+                console.log(ready);
+                console.log("Sleeping");
+                await sleep(3000);
+                console.log(@Json.Encode(Model.dataReady));
+                ready =  @Json.Encode(Model.dataReady);
+            }
+            // When data is ready
+            showDataMined();
+        }
+
+        // On page-load, check if data is ready
+        document.addEventListener('DOMContentLoaded', function() { checkDataReady(); });
     </script>
 </head>
 <body>

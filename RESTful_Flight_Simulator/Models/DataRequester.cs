@@ -7,18 +7,23 @@ namespace RESTful_Flight_Simulator.Models
     {
         private CommandClient client;
         private string[] requests;
+        private Regex rx;
         private int cols;
+
 
         public DataRequester(string ip = "127.0.0.1", int port = 5400, int cols = 2)
         {
             // Initialize client & data
-            CommandClient client = new CommandClient(ip, port);
+            client = new CommandClient(ip, port);
             this.cols = cols;
 
             // Hardcoded
             requests = new string[2];
             requests[0] = "get /position/longitude-deg";
             requests[1] = "get /position/latitude-deg";
+
+            // Double Regex
+            rx = new Regex(@"-?\d+(?:\.\d+)?", RegexOptions.Compiled);
         }
 
         public void Connect() {
@@ -42,13 +47,10 @@ namespace RESTful_Flight_Simulator.Models
             // Regex search
             if (regexSearch)
             {
-                // Regex for double
-                Regex rx = new Regex(@"^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$", RegexOptions.Compiled);
                 // Search for match and save result
                 Match match = rx.Match(line);
-                strNum = match.ToString();
                 // Parse and return double
-                return Double.Parse(strNum);
+                return Double.Parse(match.ToString());
             }
             // Loop search
             else

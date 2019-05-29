@@ -123,6 +123,7 @@
     <Compile Include="Models\DataRequester.cs" />
     <Compile Include="Models\displayModel.cs" />
     <Compile Include="Models\saveModel.cs" />
+    <Compile Include="Models\LimitedTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
