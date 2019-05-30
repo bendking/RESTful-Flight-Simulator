@@ -128,6 +128,7 @@
     <Compile Include="Models\LimitedTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\LonLat.cs" />
+    <Compile Include="Models\FacadeModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
