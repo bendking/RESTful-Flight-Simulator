@@ -6,7 +6,7 @@
 <html>
 <head>
     <script type="text/javascript" language="javascript">
-        function showDataMined()
+        function showDataMined(string data)
         {
             var body = document.body
             var div = document.createElement('div');
@@ -39,21 +39,18 @@
             body.appendChild(div);
         }
 
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-        
-        async function checkDataReady()
+        CheckDataReady()
         {
-            var ready = @Json.Encode(Model.dataReady);
-            while (ready != true) {
-                console.log(ready);
-                console.log("Sleeping");
-                await sleep(3000);
-                ready =  @Json.Encode(Model.dataReady);
-            }
-            // When data is ready
-            showDataMined();
+            // Define xhttp
+            var xhttp = new XMLHttpRequest;
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    showDataMined(this.responseText);
+                }
+            };
+
+            xhttp.open("GET", "file1.txt", true);
+            xhttp.send();
         }
 
         // On page-load, check if data is ready

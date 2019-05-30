@@ -39,7 +39,7 @@ namespace RESTful_Flight_Simulator.Models
             dataReady = true;
 
             // Write to file
-            System.IO.File.WriteAllLines(@"file1.txt", str_data);
+            System.IO.File.WriteAllText(@"file1.txt", values);
         }
     }
 }
