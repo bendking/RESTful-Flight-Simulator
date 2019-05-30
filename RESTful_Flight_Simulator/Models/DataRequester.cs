@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace RESTful_Flight_Simulator.Models
@@ -13,6 +14,7 @@ namespace RESTful_Flight_Simulator.Models
 
         public DataRequester(string ip = "127.0.0.1", int port = 5400, int cols = 2)
         {
+            System.Diagnostics.Debug.WriteLine("Initializing DataRequester.");
             // Initialize client & data
             client = new CommandClient(ip, port);
             this.cols = cols;
@@ -50,6 +52,7 @@ namespace RESTful_Flight_Simulator.Models
                 // Search for match and save result
                 Match match = rx.Match(line);
                 // Parse and return double
+                Debug.WriteLine("Match: " + match.ToString());
                 return Double.Parse(match.ToString());
             }
             // Loop search

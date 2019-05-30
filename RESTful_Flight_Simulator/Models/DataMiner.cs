@@ -15,6 +15,7 @@ namespace RESTful_Flight_Simulator.Models
         private static System.Timers.Timer timer;
         private int timerCounter;
         private int timerLimit;
+        private float interval;
         // Data
         private bool save;
         private double[][] data;
@@ -27,14 +28,15 @@ namespace RESTful_Flight_Simulator.Models
         private bool notifyDone;
 
         // Interval - in milliseconds, duration - in seconds, save - decide whether to save data mined or not
-        public DataMiner(string ip = "127.0.0.1", int port = 5400, int duration = 10, int interval = 1000, bool save = false)
+        public DataMiner(string ip, int port, float interval, float duration, bool save = false)
         {
+            Debug.WriteLine(ip + ',' + port.ToString() + ',' + interval.ToString() + ',' + duration.ToString());
             // Initialize client & data
             requester = new DataRequester(ip, port);
-            int logs_per_second = (int) (1 / ((float) interval / 1000));
-            Debug.WriteLine(logs_per_second);
-            int logs = duration * logs_per_second;
-            Debug.WriteLine(logs);
+            float logs_per_second = (1 / (interval / 1000));
+            Debug.WriteLine("Logs per second: " + logs_per_second.ToString());
+            int logs = (int) (duration * logs_per_second);
+            Debug.WriteLine("Logs to be written: " + logs.ToString());
 
             // Data
             this.save = save;
@@ -44,14 +46,10 @@ namespace RESTful_Flight_Simulator.Models
                 dataReadyTrigger = new System.Threading.ManualResetEvent(false);
             }
 
-            // Initialize timer
-            timer = new Timer(interval);
-            timer.Elapsed += Tick;
-            timer.AutoReset = true;
-
             // Reset timer counters 
             timerCounter = 0;
             timerLimit = logs;
+            this.interval = interval;
 
             // Initialize listeners
             tickListeners = new List<Action<double[]>>();
@@ -82,6 +80,11 @@ namespace RESTful_Flight_Simulator.Models
 
         public void Mine()
         {
+            // Initialize timer
+            timer = new Timer(interval);
+            timer.Elapsed += Tick;
+            timer.AutoReset = true;
+            // Connect and start timer
             requester.Connect();
             timer.Start();
             Debug.WriteLine("Mining commenced.");
@@ -109,8 +112,10 @@ namespace RESTful_Flight_Simulator.Models
             }
             else
             {
-                // Reset timer
-                timer.Stop();
+                Debug.Write("Stopping timer.");
+                // Reset timer / KILL TIMER
+                timer = null;
+                //timer.Stop();
                 timerCounter = 0;
                 // Announce data is ready to take
                 if (save)
