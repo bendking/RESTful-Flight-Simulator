@@ -11,7 +11,20 @@
 <body>
     <img src="~/Views/src/world-map.png" id="bg" alt="World Map">
 
-    <h2>Display Live Route</h2>
+
+    <canvas id="myCanvas"></canvas>
+
+
+    <script>var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext("2d");
+        context.arc(100, 50, 1, 0, 2 * Math.PI, false);
+        context.fillStyle = "#ff6347";
+        context.fill();
+
+
+
+        </script>
+
 </body>
 
 </html>
