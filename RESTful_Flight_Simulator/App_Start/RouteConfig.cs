@@ -24,8 +24,6 @@ namespace RESTful_Flight_Simulator
                 defaults: new { controller = "save", action = "SaveRoute" }
             );
 
-            
-
             // Display route of plane as it flies (update per interval (in seconds))
             routes.MapRoute(
                 "LiveRoute",

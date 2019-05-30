@@ -17,8 +17,8 @@ namespace RESTful_Flight_Simulator.Controllers
             // Save route
             //model.SaveRoute();
             // Save route in the background
-            Thread thread = new Thread(model.SaveRoute);
-            thread.Start();
+            //Thread thread = new Thread(model.SaveRoute);
+            //thread.Start();
             // Show view
             return View(model);
         }
