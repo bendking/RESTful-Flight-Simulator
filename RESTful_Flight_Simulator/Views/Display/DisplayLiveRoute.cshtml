@@ -6,24 +6,19 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="~/Views/Shared/BackgroundImageCSSFile.css" />
+    <script src="~/Views/Shared/SharedJSFile.js" type="text/javascript"></script>
+
 </head>
 
 <body>
     <img src="~/Views/src/world-map.png" id="bg" alt="World Map">
-
-
     <canvas id="myCanvas"></canvas>
+   
+    <script>
 
+        drawCircle(50,50,"myCanvas");
 
-    <script>var canvas = document.getElementById("myCanvas");
-        var context = canvas.getContext("2d");
-        context.arc(100, 50, 1, 0, 2 * Math.PI, false);
-        context.fillStyle = "#ff6347";
-        context.fill();
-
-
-
-        </script>
+    </script>
 
 </body>
 

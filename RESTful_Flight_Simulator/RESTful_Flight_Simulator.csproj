@@ -111,6 +111,7 @@
     <Content Include="Views\src\world-map.png" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\BackgroundImageCSSFile.css" />
+    <Content Include="Views\Shared\SharedJSFile.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
