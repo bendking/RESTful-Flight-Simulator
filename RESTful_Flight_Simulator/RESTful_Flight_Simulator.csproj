@@ -127,6 +127,7 @@
     <Compile Include="Models\saveModel.cs" />
     <Compile Include="Models\LimitedTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\LonLat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
