@@ -13,13 +13,8 @@ namespace RESTful_Flight_Simulator.Controllers
         // GET: Save
         public ActionResult SaveRoute(string ip, int port, float interval, int duration, string file)
         {
-            saveModel model = new saveModel(ip, port, interval, duration, file);
-            // Save route
-            //model.SaveRoute();
-            // Save route in the background
-            //Thread thread = new Thread(model.SaveRoute);
-            //thread.Start();
-            // Show view
+            displayModel model = new displayModel(ip, ""+port, file, ""+interval, ""+duration);
+         
             return View(model);
         }
 

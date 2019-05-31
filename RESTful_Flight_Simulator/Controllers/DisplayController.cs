@@ -11,6 +11,7 @@ namespace RESTful_Flight_Simulator.Controllers
     public class displayController : Controller
     {
 
+        /*
         // GET
         public ActionResult DetermineRoute(string param1, int param2)
         {
@@ -22,13 +23,13 @@ namespace RESTful_Flight_Simulator.Controllers
             // Else
             return DisplaySavedRoute(param1, param2);
         }
-        
+        */
 
         [HttpGet]
         public ActionResult DisplayLocation(string ip, int port)
         {
             // TODO: Insert ip and port as necessary to model
-            displayModel model = new displayModel();
+            displayModel model = new displayModel(ip, ""+port, null, null, null);
             return View(model);
         }
 
@@ -36,7 +37,7 @@ namespace RESTful_Flight_Simulator.Controllers
         public ActionResult DisplayLiveRoute(string ip, int port)
         {
             // TODO: Insert ip and port as necessary to model
-            displayModel model = new displayModel();
+            displayModel model = new displayModel(ip, ""+port, null, null, null);
             return View(model);
         }
 
@@ -44,7 +45,7 @@ namespace RESTful_Flight_Simulator.Controllers
         public ActionResult DisplaySavedRoute(string fileName, int interval)
         {
             // TODO: Insert file name and interval as necessary to model
-            displayModel model = new displayModel();
+            displayModel model = new displayModel(null, null,fileName, ""+interval, null);
             return View(model);
         }
     }
