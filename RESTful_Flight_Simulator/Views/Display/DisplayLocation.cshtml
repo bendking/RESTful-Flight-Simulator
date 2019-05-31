@@ -12,6 +12,58 @@
     <img src="~/files/world-map.png" id="bg" alt="World Map">
 
     <h2>Display Location</h2>
+
+
+    <script type="text/javascript">
+
+                document.writeln("test");
+
+        var input = {
+            vars: "40",
+        };
+
+        $.get("@Url.Action("GetCoordinates", "data")", input).done(function (data) {
+                            document.writeln("success");
+
+             var xmlDoc = $.parseXML(data),
+             $xml = $(xmlDoc),
+             Lon = $xml.find("Lon").text();
+            Lat = $xml.find("Lat").text();
+            document.writeln(Lon);
+            document.writeln(Lat);
+            
+
+        });
+
+        /*
+
+
+    $.ajax({
+    type: "GET",
+    url: 'display/Search',
+    data: {},
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    beforeSend: function(){
+    document.writeln("sending");
+    },
+    success: function (response) {
+    document.writeln("success");
+
+
+    },
+    complete: function(){
+    document.writeln("done");
+
+    },
+    failure: function (jqXHR, textStatus, errorThrown) {
+    alert("HTTP Status: " + jqXHR.status + "; Error Text: " + jqXHR.responseText); // Display error message
+    }
+    });
+    */
+
+    </script>
+
 </body>
 
 </html>

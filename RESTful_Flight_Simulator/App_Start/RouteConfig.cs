@@ -13,6 +13,13 @@ namespace RESTful_Flight_Simulator
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+                name: "first",
+                url: "{controller}/{action}"
+               
+            );
+
             //
             // Dynamic routes
             //
