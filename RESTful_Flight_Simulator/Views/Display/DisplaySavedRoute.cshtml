@@ -18,16 +18,17 @@
     <script type="text/javascript">
         document.title = "Saved Route";
 
-        // TODO - set the time correctly, it's alayws 1000 ms
-        var t=setInterval(start,1000);
         var i = 0;
+        var fileName = '@Model.fileName';
+        var interval = parseInt('@Model.interval');
+
+        var t=setInterval(start,1000.0 / interval);
 
         function start(){
         i++;
 
-
         var input = {
-            vars: `ofeci,${i}`,
+            vars: `${fileName},${i}`,
 
         };
 

@@ -27,14 +27,14 @@ namespace RESTful_Flight_Simulator
             // Save route of plane as it flies into a file
             routes.MapRoute(
                 name: "SaveRoute",
-                url: "{controller}/{ip}/{port}/{interval}/{duration}/{file}",
+                url: "save/{ip}/{port}/{interval}/{duration}/{file}",
                 defaults: new { controller = "save", action = "SaveRoute" }
             );
 
             // Display route of plane as it flies (update per interval (in seconds))
             routes.MapRoute(
                 "LiveRoute",
-                "{controller}/{ip}/{port}/{interval}",
+                "display/{ip}/{port}/{interval}",
                 new { controller = "display", action = "DisplayLiveRoute"},
                 new {ip = @"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"}
             );
@@ -42,7 +42,7 @@ namespace RESTful_Flight_Simulator
             // DisplayLocation
             routes.MapRoute(
                 "CurrentLocation",
-                "{controller}/{ip}/{port}/",
+                "display/{ip}/{port}/",
                 new { controller = "display", action = "DisplayLocation"},
                 new { ip = @"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
             );
@@ -50,10 +50,11 @@ namespace RESTful_Flight_Simulator
             // DisplaySavedRoute
             routes.MapRoute(
                 name: "SavedRoute",
-                url: "{controller}/{file}/{interval}/",
-                defaults: new { controller = "display", action = "DisplaySavedRoute"}
+                url: "display/{fileName}/{interval}/",
+                defaults: new { controller = "display", action = "DisplaySavedRoute" }
             );
 
+            /*
             // for debug 
             routes.MapRoute(
                name: "Default",
@@ -78,7 +79,7 @@ namespace RESTful_Flight_Simulator
                url: "{controller}/{image_path}",
                defaults: new { controller = "files", action = "ReturnImage" }
            );
-
+           */
 
 
         }

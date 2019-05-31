@@ -44,6 +44,7 @@ namespace RESTful_Flight_Simulator.Controllers
         [HttpGet]
         public ActionResult DisplaySavedRoute(string fileName, int interval)
         {
+
             // TODO: Insert file name and interval as necessary to model
             displayModel model = new displayModel(null, null,fileName, ""+interval, null);
             return View(model);
