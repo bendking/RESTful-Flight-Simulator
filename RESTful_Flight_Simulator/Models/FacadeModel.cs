@@ -4,7 +4,7 @@ namespace RESTful_Flight_Simulator.Models
 {
     public class FacadeModel
     {
-
+        private DataRequester dataRequester;
         private static readonly FacadeModel _singleton = new FacadeModel();
 
         public static FacadeModel GetInstance()
@@ -14,11 +14,14 @@ namespace RESTful_Flight_Simulator.Models
 
         private FacadeModel()
         {
-
+            dataRequester = new DataRequester();
         }
 
         public LonLat GetCoordinatesFromServer(string ip, int port)
         {
+            dataRequester.ChangeConnectionIfNeeded(ip, port);
+            double[] arr = dataRequester.RequestData();
+            LonLat x = new LonLat(arr[0], arr[1]);
             return new LonLat(50, 50);
         }
 

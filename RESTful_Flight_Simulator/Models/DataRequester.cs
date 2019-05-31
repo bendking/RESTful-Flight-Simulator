@@ -28,9 +28,16 @@ namespace RESTful_Flight_Simulator.Models
             rx = new Regex(@"-?\d+(?:\.\d+)?", RegexOptions.Compiled);
         }
 
+        public void ChangeConnectionIfNeeded(string ip,int port)
+        {
+            client.ParametersChanged(ip, port);
+        }
+
         public void Connect() {
             client.Connect();
         }
+
+      
 
         // Must connect first
         public double[] RequestData()

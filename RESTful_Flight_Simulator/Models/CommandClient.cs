@@ -27,23 +27,6 @@ namespace RESTful_Flight_Simulator.Models
             set { port = value; }
         }
 
-        public static CommandClient GetInstance(string _ip, int _port)
-        {
-            if (commandClientSingleton == null)
-            {
-                // Initate singleton
-                commandClientSingleton = new CommandClient(_ip, _port);
-            }
-            else if (commandClientSingleton.ParametersChanged(_ip, _port))
-            {
-                // Initiate new singleton if parameters changes
-                commandClientSingleton.Close();
-                commandClientSingleton = new CommandClient(_ip, _port);
-            }
-
-            return commandClientSingleton;
-
-        }
         public static CommandClient GetInstance()
         {
             if (commandClientSingleton == null)
@@ -57,6 +40,10 @@ namespace RESTful_Flight_Simulator.Models
         {
             if (ip != _ip || port != _port)
             {
+                Close();
+                ip = _ip;
+                port = _port;
+                Connect();
                 return true;
             }
             // Else
@@ -67,6 +54,7 @@ namespace RESTful_Flight_Simulator.Models
             FlightServerIP = _ip;
             FlightCommandPort = _port;
         }
+
         public CommandClient()
         {
             // Default constructor
@@ -89,7 +77,7 @@ namespace RESTful_Flight_Simulator.Models
             writer = new StreamWriter(client.GetStream());
             reader = new StreamReader(client.GetStream());
         }
-
+      
         public void Send(string msg)
         {
             if (!connected) return;
