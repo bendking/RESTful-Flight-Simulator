@@ -17,20 +17,21 @@ namespace RESTful_Flight_Simulator.Models
 
         }
 
-        public LonLat GetCoordinates(string ip, int port)
+        public LonLat GetCoordinatesFromServer(string ip, int port)
         {
             return new LonLat(50, 50);
         }
 
         public LonLat GetCoordinatesAndSave(string ip, int port, string file)
         {
-            LonLat x = GetCoordinates(ip, port);
-            // save x
+            LonLat x = GetCoordinatesFromServer(ip, port);
+            // TODO - save x!!!
             return x;
         }
 
         public LonLat GetCoordinatesFromFile(string file, int index)
         {
+            // TODO - get next coordinate from file!!!
             return new LonLat(50, 50);
         }
 
