@@ -37,5 +37,35 @@ namespace RESTful_Flight_Simulator.Models
             return sb.ToString();
         }
 
+        public string toString()
+        {
+            return "" + Lon + "," + Lat;
+        }
+
+        public static LonLat FromString(string s)
+        {
+            List<string> x = s.Split(',').ToList<string>();
+            //x.Reverse();
+
+            return new LonLat(int.Parse(x[0]), int.Parse(x[1]));
+        }
+
+        public static string NullLonLatToXML()
+        {
+            StringBuilder sb = new StringBuilder();
+            XmlWriterSettings settings = new XmlWriterSettings();
+            XmlWriter writer = XmlWriter.Create(sb, settings);
+
+            writer.WriteStartDocument();
+            writer.WriteStartElement("Coordinates");
+
+            writer.WriteElementString("Lon", "EOF");
+            writer.WriteElementString("Lat", "EOF");
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Flush();
+            return sb.ToString();
+        }
     }
 }

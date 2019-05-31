@@ -7,6 +7,10 @@ namespace RESTful_Flight_Simulator.Models
 {
     public class displayModel
     {
+        public displayModel()
+        {
+            FileManagerModel x = new FileManagerModel();
 
+        }
     }
 }

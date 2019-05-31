@@ -39,20 +39,36 @@ namespace RESTful_Flight_Simulator.Controllers
 
                 x = CoordinatesFromFile(file, index);
             }
-            return x.ToXml();
+
+            if (x != null)
+            {
+                return x.ToXml();
+            }
+            else
+            {
+                return LonLat.NullLonLatToXML();
+            }
         }
 
         [HttpGet]
         public string GetCoordinatesAndSave(string vars)
         {
-            LonLat x = FacadeModel.GetInstance().GetCoordinatesFromServer("vars", int.Parse(vars));
+            List<string> l = extractVars(vars);
+            int port = 5400;
+            int.TryParse(l[1], out port);
+            LonLat x = FacadeModel.GetInstance().GetCoordinatesAndSave(l[0], port, l[2]);
+            if(x==null)
+            {
+                return LonLat.NullLonLatToXML();
+            }
             return x.ToXml();
         }
 
 
         private LonLat CoordinatesFromFile(string file, int index)
         {
-            return FacadeModel.GetInstance().GetCoordinatesFromFile(file, index); ;
+            return FacadeModel.GetInstance().GetCoordinatesFromFile(file, index);
+           
         }
         private LonLat CoordinatesFromServer(string ip, int port)
         {
@@ -62,7 +78,7 @@ namespace RESTful_Flight_Simulator.Controllers
         private List<string> extractVars(string vars)
         {
             List<string> l = vars.Split(',').ToList<string>();
-            l.Reverse();
+           // l.Reverse();
             return l;
         }
     }

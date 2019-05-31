@@ -131,6 +131,7 @@
     <Compile Include="Models\LonLat.cs" />
     <Compile Include="Models\FacadeModel.cs" />
     <Compile Include="Controllers\dataController.cs" />
+    <Compile Include="Models\FileManagerModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

@@ -4,5 +4,43 @@
 }
 
 
-<img src="~/files/world-map.png" alt="World Map">
-<h2>Display Saved Route</h2>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Views/Shared/BackgroundImageCSSFile.css" />
+    <script src="~/Views/Shared/SharedJSFile.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <img src="~/src/world-map.png" id="bg" alt="World Map">
+    <canvas id="myCanvas"></canvas>
+
+    <script type="text/javascript">
+        document.title = "Saved Route";
+
+        var input = {
+            vars: "ofeci,10",
+
+        };
+
+        $.get("@Url.Action("GetCoordinates", "data")", input).done(function (data) {
+
+            var xmlDoc = $.parseXML(data),
+            $xml = $(xmlDoc),
+            Lon = $xml.find("Lon").text();
+            Lat = $xml.find("Lat").text();
+
+
+            if(Lon.localeCompare("EOF") == 0 || Lat.localeCompare("EOF") == 0) {
+                // done
+                alert("done!");
+            } else {
+                drawCircle(parseInt(Lon), parseInt(Lat), "myCanvas");
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
