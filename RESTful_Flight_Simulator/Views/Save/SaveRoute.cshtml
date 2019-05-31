@@ -3,68 +3,58 @@
     ViewBag.Title = "SaveRoute";
 }
 
+
 <html>
 <head>
-    <script type="text/javascript" language="javascript">
-        /*
-        function CheckDataReady()
-        {
-            // Define xhttp
-            var xhttp = new XMLHttpRequest;
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-                    ShowDataMined(this.responseText);
-                }
-            };
-            // Get file1.txt from Save folder
-            var fileName = "@Model.fileName";
-            xhttp.open("GET", "../../../../../save/" + fileName, true);
-            xhttp.send();
-        }
+    <link rel="stylesheet" type="text/css" href="~/Views/Shared/BackgroundImageCSSFile.css" />
+    <script src="~/Views/Shared/SharedJSFile.js" type="text/javascript"></script>
 
-        function ShowDataMined(dataStr)
-        {
-            var body = document.body;
-            var div = document.createElement('div');
-            var list = document.createElement('ul');
-            div.style = "margin-left: 20%; margin-top: 15px";
-
-            // Get data mined & parse it
-            // OLD LINE WAS HERE
-            var dataPoints = dataStr.split(' ');
-
-            // Insert list to DOM
-            var length = dataPoints.length;
-            for (var i = 0; i < length; i++)
-            {
-                var li = document.createElement('li');
-                li.innerHTML = dataPoints[i];
-                list.appendChild(li);
-            }
-
-            // Build title for list
-            var title = document.createElement('h3');
-            title.innerHTML = "Data mined:";
-
-            // Finally, append elements
-            body.appendChild(document.createElement('hr'));
-            // Append title and list to div
-            div.appendChild(title);
-            div.appendChild(list);
-            // Append div to body
-            body.appendChild(div);
-        }
-
-        // On page-load, check if data is ready
-        document.addEventListener('DOMContentLoaded', function () { CheckDataReady(); });
-        */
-    </script>
 </head>
+
 <body>
-    <h2>Saving route...</h2>
+    <img src="~/src/world-map.png" id="bg" alt="World Map">
+    <canvas id="myCanvas"></canvas>
+
+    <script type="text/javascript">
+        document.title = "Live Route";
+
+        var ip = '@Model.ip';
+        var port = '@Model.port';
+        var duration = parseInt('@Model.duration');
+        var interval = parseInt('@Model.interval');
+        var fileName = '@Model.fileName';
+
+        var t=setInterval(start,1000.0 / interval);
+        int i = 0;
+        function start(){
+            if (i/interval > duration) {
+                alert("done!");
+                clearInterval(t);
+            }
+            i++;
+        var input = {
+            vars: `${ip},${port},${fileName}`,
+
+        };
+
+        $.get("@Url.Action("GetCoordinatesAndSave", "data")", input).done(function (data) {
+
+            var xmlDoc = $.parseXML(data),
+            $xml = $(xmlDoc),
+            Lon = $xml.find("Lon").text();
+            Lat = $xml.find("Lat").text();
+
+
+            if(Lon.localeCompare("EOF") == 0 || Lat.localeCompare("EOF") == 0) {
+                // done
+                alert("done!");
+                clearInterval(t);
+            } else {
+                drawCircle(parseInt(Lon), parseInt(Lat), "myCanvas");
+            }
+        });
+            }
+    </script>
+
 </body>
 </html>
-
-
-

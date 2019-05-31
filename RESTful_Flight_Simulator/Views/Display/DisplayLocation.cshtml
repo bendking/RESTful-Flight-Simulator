@@ -15,22 +15,35 @@
     <canvas id="myCanvas"></canvas>
 
     <script type="text/javascript">
-        document.title = "Static Location";
+        document.title = "Live Route";
 
+        var ip = '@Model.ip';
+        var port = '@Model.port';
+
+        var interval = parseInt('@Model.interval');
+        
         var input = {
-            vars: "127.0.0.",
+            vars: `${ip},${port}`,
+
         };
 
         $.get("@Url.Action("GetCoordinates", "data")", input).done(function (data) {
 
             var xmlDoc = $.parseXML(data),
             $xml = $(xmlDoc),
-            Lon = parseInt($xml.find("Lon").text());
-            Lat = parseInt($xml.find("Lat").text());
-            drawCircle(Lon, Lat, "myCanvas");
+            Lon = $xml.find("Lon").text();
+            Lat = $xml.find("Lat").text();
 
+
+            if(Lon.localeCompare("EOF") == 0 || Lat.localeCompare("EOF") == 0) {
+                // done
+                alert("done!");
+                clearInterval(t);
+            } else {
+                drawCircle(parseInt(Lon), parseInt(Lat), "myCanvas");
+            }
         });
-
+            
     </script>
 
 </body>
