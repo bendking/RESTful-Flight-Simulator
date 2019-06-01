@@ -25,7 +25,7 @@
         var fileName = '@Model.fileName';
 
         var t=setInterval(start,1000.0 / interval);
-        int i = 0;
+        var i = 0;
         function start(){
             if (i/interval > duration) {
                 alert("done!");
@@ -50,7 +50,7 @@
                 alert("done!");
                 clearInterval(t);
             } else {
-                drawCircle(parseInt(Lon), parseInt(Lat), "myCanvas");
+                drawCircle(parseFloat(Lon), parseFloat(Lat), "myCanvas");
             }
         });
             }

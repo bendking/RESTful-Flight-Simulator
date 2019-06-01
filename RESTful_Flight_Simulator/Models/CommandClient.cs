@@ -26,7 +26,11 @@ namespace RESTful_Flight_Simulator.Models
             get { return port; }
             set { port = value; }
         }
-
+        public bool IsConnected
+        {
+            get { return connected; }
+            set { connected = value; }
+        }
         public static CommandClient GetInstance()
         {
             if (commandClientSingleton == null)
@@ -38,11 +42,11 @@ namespace RESTful_Flight_Simulator.Models
         }
         public bool ParametersChanged(string _ip, int _port)
         {
-            if (ip != _ip || port != _port)
+            if (!ip.Equals( _ip) || port != _port)
             {
                 Close();
-                ip = _ip;
-                port = _port;
+                FlightServerIP = _ip;
+                FlightCommandPort = _port;
                 Connect();
                 return true;
             }

@@ -24,7 +24,7 @@ namespace RESTful_Flight_Simulator.Models
             dataRequester.ChangeConnectionIfNeeded(ip, port);
             double[] arr = dataRequester.RequestData();
             LonLat x = new LonLat(arr[0], arr[1]);
-            return new LonLat(50, 50);
+            return x;
         }
 
         public LonLat GetCoordinatesAndSave(string ip, int port, string file)

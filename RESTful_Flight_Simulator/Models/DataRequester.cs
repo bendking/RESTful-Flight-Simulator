@@ -31,6 +31,10 @@ namespace RESTful_Flight_Simulator.Models
         public void ChangeConnectionIfNeeded(string ip,int port)
         {
             client.ParametersChanged(ip, port);
+            if(!client.IsConnected)
+            {
+                Connect();
+            }
         }
 
         public void Connect() {

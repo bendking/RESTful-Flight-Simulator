@@ -21,7 +21,7 @@
         var port = '@Model.port';
 
         var interval = parseInt('@Model.interval');
-        
+
         var input = {
             vars: `${ip},${port}`,
 
@@ -40,10 +40,10 @@
                 alert("done!");
                 clearInterval(t);
             } else {
-                drawCircle(parseInt(Lon), parseInt(Lat), "myCanvas");
+                drawCircle(parseFloat(Lon), parseFloat(Lat), "myCanvas");
             }
         });
-            
+
     </script>
 
 </body>
