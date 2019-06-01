@@ -9,6 +9,8 @@ namespace RESTful_Flight_Simulator.Models
     {
         private DataRequester dataRequester;
         private FileManagerModel fileManager;
+        private readonly object syncLock;
+
         private static readonly FacadeModel _singleton = new FacadeModel();
 
         public static FacadeModel GetInstance()
@@ -20,12 +22,18 @@ namespace RESTful_Flight_Simulator.Models
         {
             fileManager = new FileManagerModel();
             dataRequester = new DataRequester();
+            syncLock = new object();
         }
 
         public LonLat GetCoordinatesFromServer(string ip, int port)
         {
-            dataRequester.ChangeConnectionIfNeeded(ip, port);
-            double[] arr = dataRequester.RequestData();
+            double[] arr;
+            lock (syncLock)
+            {
+                /* critical code */
+                dataRequester.ChangeConnectionIfNeeded(ip, port);
+                arr = dataRequester.RequestData();
+            }
             LonLat x = new LonLat(arr[0], arr[1]);
             return x;
         }
