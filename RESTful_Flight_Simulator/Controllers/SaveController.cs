@@ -13,7 +13,7 @@ namespace RESTful_Flight_Simulator.Controllers
         // GET: Save
         public ActionResult SaveRoute(string ip, int port, float interval, int duration, string file)
         {
-            displayModel model = new displayModel(ip, ""+port, file, ""+interval, ""+duration);
+            saveModel model = new saveModel(ip, ""+port, file, ""+interval, ""+duration);
          
             return View(model);
         }

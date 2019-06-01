@@ -5,8 +5,29 @@ using System.Web.UI;
 
 namespace RESTful_Flight_Simulator.Models
 {
-    public class saveModel
+    public class saveModel 
     {
+
+
+        public string ip { get; set; }
+        public string port { get; set; }
+        public string fileName { get; set; }
+        public string interval { get; set; }
+        public string duration { get; set; }
+
+        public saveModel(string _ip, string _port, string _fileName, string _interval, string _duration)
+        {
+            ip = _ip;
+            fileName = _fileName;
+            port = _port;
+            interval = _interval;
+            duration = _duration;
+
+
+        }
+
+
+        /*
         private DataMiner miner;
         public string dataMined;
         public bool dataReady;
@@ -62,5 +83,6 @@ namespace RESTful_Flight_Simulator.Models
                 Console.WriteLine("The specified directory does not exist. {0}", e);
             }
         }
+        */
     }
 }
