@@ -85,7 +85,7 @@ namespace RESTful_Flight_Simulator.Models
         public void Send(string msg)
         {
             if (!connected) return;
-            writer.WriteLine(msg);
+            writer.WriteLine(msg + "\n\r");
             writer.Flush();
         }
 
