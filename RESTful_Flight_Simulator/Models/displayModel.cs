@@ -20,8 +20,6 @@ namespace RESTful_Flight_Simulator.Models
             port = _port;
             interval = _interval;
             duration = _duration;
-
-
         }
 
       

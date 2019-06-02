@@ -2,8 +2,10 @@
 using System.Timers;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
+
+//
+// Deprecated
+//
 
 namespace RESTful_Flight_Simulator.Models
 {

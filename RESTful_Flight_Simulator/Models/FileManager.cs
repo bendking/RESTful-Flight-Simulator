@@ -4,32 +4,30 @@ using RESTful_Flight_Simulator.Models;
 
 namespace RESTful_Flight_Simulator.Models
 {
-    public class FileManagerModel
+    public class FileManager
     {
         private StreamReader sr;
         private int lineNumber;
         private string currentFile=null;
 
-        public FileManagerModel()
+        public FileManager()
         {
-         
+            // Default constructor
         }
 
-        private string getPath(string file)
-        {
+        private string getPath(string file) {
             return "../RESTful_Flight_Simulator/Views/Save/Routes/" + file + ".txt";
         }
 
-        public void AppendFile(LonLat lonLat, string file)
+        public void AppendToFile(LonLat lonLat, string file)
         {
             string path = getPath(file);
-            if(!File.Exists(path))
-            {
+            if (!File.Exists(path)) {
+                // Create file and dispose of stream opened for it
                 File.CreateText(path).Dispose();
             }
-
+            // Append LonLoat to file
             File.AppendAllText(path, lonLat.toString() + Environment.NewLine);
-         
         }
 
         public LonLat GetFromFile(int index, string file)
@@ -53,7 +51,7 @@ namespace RESTful_Flight_Simulator.Models
 
             if (line == null || line.Equals(Environment.NewLine) )
             {
-                //end of file
+                // End of file
                 return null;
             }
 

@@ -8,9 +8,9 @@ namespace RESTful_Flight_Simulator.Models
     public class FacadeModel
     {
         private DataRequester dataRequester;
-        private FileManagerModel fileManager;
+        private FileManager fileManager;
         private readonly object syncLock;
-
+        // Initiate singleston on program start
         private static readonly FacadeModel _singleton = new FacadeModel();
 
         public static FacadeModel GetInstance()
@@ -20,7 +20,7 @@ namespace RESTful_Flight_Simulator.Models
 
         private FacadeModel()
         {
-            fileManager = new FileManagerModel();
+            fileManager = new FileManager();
             dataRequester = new DataRequester();
             syncLock = new object();
         }
@@ -41,17 +41,16 @@ namespace RESTful_Flight_Simulator.Models
         public LonLat GetCoordinatesAndSave(string ip, int port, string file)
         {
             LonLat x = GetCoordinatesFromServer(ip, port);
-            if (x == null)
-            {
+            if (x == null) {
                 return null;
             }
-            fileManager.AppendFile(x, file);
+
+            fileManager.AppendToFile(x, file);
             return x;
         }
 
         public LonLat GetCoordinatesFromFile(string file, int index)
         {
-            // TODO - get next coordinate from file!!!
             return fileManager.GetFromFile(index, file);
         }
 

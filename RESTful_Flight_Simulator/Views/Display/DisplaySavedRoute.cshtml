@@ -17,38 +17,38 @@
 
     <script type="text/javascript">
         document.title = "Saved Route";
-
+        // Define needed vars
         var i = 0;
         var fileName = '@Model.fileName';
         var interval = parseInt('@Model.interval');
 
-        var t=setInterval(start,1000.0 / interval);
+        var t = setInterval(start,1000.0 / interval);
 
-        function start(){
-        i++;
+        function start()
+        {
+            i++;
+            var input = {
+                vars: `${fileName},${i}`,
 
-        var input = {
-            vars: `${fileName},${i}`,
+            };
 
-        };
+            $.get("@Url.Action("GetCoordinates", "data")", input).done(function (data) {
 
-        $.get("@Url.Action("GetCoordinates", "data")", input).done(function (data) {
-
-            var xmlDoc = $.parseXML(data),
-            $xml = $(xmlDoc),
-            Lon = $xml.find("Lon").text();
-            Lat = $xml.find("Lat").text();
+                var xmlDoc = $.parseXML(data),
+                $xml = $(xmlDoc),
+                Lon = $xml.find("Lon").text();
+                Lat = $xml.find("Lat").text();
 
 
-            if(Lon.localeCompare("EOF") == 0 || Lat.localeCompare("EOF") == 0) {
-                // done
-                alert("done!");
-                clearInterval(t);
-            } else {
-                drawCircle(parseFloat(Lon), parseFloat(Lat), "myCanvas");
-            }
-        });
-            }
+                if(Lon.localeCompare("EOF") == 0 || Lat.localeCompare("EOF") == 0) {
+                    // done
+                    alert("Done!");
+                    clearInterval(t);
+                } else {
+                    drawCircle(parseFloat(Lon), parseFloat(Lat), "myCanvas");
+                }
+            });
+        }
     </script>
 
 </body>

@@ -34,6 +34,7 @@ namespace RESTful_Flight_Simulator.Models
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Flush();
+
             return sb.ToString();
         }
 
@@ -44,10 +45,12 @@ namespace RESTful_Flight_Simulator.Models
 
         public static LonLat FromString(string s)
         {
+            System.Diagnostics.Debug.WriteLine(s);
             List<string> x = s.Split(',').ToList<string>();
-            //x.Reverse();
+            System.Diagnostics.Debug.WriteLine(x[0]);
+            System.Diagnostics.Debug.WriteLine(x[1]);
 
-            return new LonLat(int.Parse(x[0]), int.Parse(x[1]));
+            return new LonLat((int)(double.Parse(x[0])), (int)double.Parse(x[1]));
         }
 
         public static string NullLonLatToXML()
@@ -64,6 +67,8 @@ namespace RESTful_Flight_Simulator.Models
 
             writer.WriteEndElement();
             writer.WriteEndDocument();
+            
+            // Flush data to XML (string builder)
             writer.Flush();
             return sb.ToString();
         }

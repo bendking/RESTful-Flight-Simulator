@@ -11,7 +11,6 @@ namespace RESTful_Flight_Simulator.Models
         private Regex rx;
         private int cols;
 
-
         public DataRequester(string ip = "127.0.0.1", int port = 5400, int cols = 2)
         {
             System.Diagnostics.Debug.WriteLine("Initializing DataRequester.");
@@ -31,8 +30,7 @@ namespace RESTful_Flight_Simulator.Models
         public void ChangeConnectionIfNeeded(string ip,int port)
         {
             client.ParametersChanged(ip, port);
-            if(!client.IsConnected)
-            {
+            if (!client.IsConnected) {
                 Connect();
             }
         }
@@ -47,10 +45,10 @@ namespace RESTful_Flight_Simulator.Models
         public double[] RequestData()
         {
             double[] lineData = new double[cols];
-
+            // Get data and parse to double
             lineData[0] = ParseNumber(client.SendAndGet(requests[0]));
             lineData[1] = ParseNumber(client.SendAndGet(requests[1]));
-
+            // Return data
             return lineData;
         }
 
@@ -66,7 +64,7 @@ namespace RESTful_Flight_Simulator.Models
                 Debug.WriteLine("Match: " + match.ToString());
                 return Double.Parse(match.ToString());
             }
-            // Loop search
+            // Loop search (might be faster)
             else
             {
                 strNum = "";

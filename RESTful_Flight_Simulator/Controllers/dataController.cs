@@ -18,34 +18,30 @@ namespace RESTful_Flight_Simulator.Controllers
         [HttpGet]
         public string GetCoordinates(string vars)
         {
-            List<string> l = extractVars(vars);
-            var regex = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
-
-            var match = Regex.Match(l[0], regex, RegexOptions.IgnoreCase);
+            List<string> list = extractVars(vars);
+            string regex = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$";
+            Match match = Regex.Match(list[0], regex, RegexOptions.IgnoreCase);
 
             LonLat x;
             if (match.Success)
             {
-                string ip = l[0];
+                string ip = list[0];
                 int port = 5400;
-                int.TryParse(l[1], out port);
-              
+                int.TryParse(list[1], out port);
                 x = CoordinatesFromServer(ip, port);
-            }
-            else {
-                string file = l[0];
-                int index = 0;
-                int.TryParse(l[1], out index);
-
-                x = CoordinatesFromFile(file, index);
-            }
-
-            if (x != null)
-            {
-                return x.ToXml();
             }
             else
             {
+                string file = list[0];
+                int index = 0;
+                int.TryParse(list[1], out index);
+                x = CoordinatesFromFile(file, index);
+            }
+
+            if (x != null) {
+                return x.ToXml();
+            }
+            else {
                 return LonLat.NullLonLatToXML();
             }
         }
@@ -54,32 +50,29 @@ namespace RESTful_Flight_Simulator.Controllers
         public string GetCoordinatesAndSave(string vars)
         {
             List<string> l = extractVars(vars);
+            // Default value
             int port = 5400;
             int.TryParse(l[1], out port);
             LonLat x = FacadeModel.GetInstance().GetCoordinatesAndSave(l[0], port, l[2]);
-            if(x==null)
-            {
+
+            if (x == null) {
                 return LonLat.NullLonLatToXML();
             }
+            // Else
             return x.ToXml();
         }
 
 
-        private LonLat CoordinatesFromFile(string file, int index)
-        {
+        private LonLat CoordinatesFromFile(string file, int index) {
             return FacadeModel.GetInstance().GetCoordinatesFromFile(file, index);
-           
+
         }
-        private LonLat CoordinatesFromServer(string ip, int port)
-        {
+        private LonLat CoordinatesFromServer(string ip, int port) {
             return FacadeModel.GetInstance().GetCoordinatesFromServer(ip, port);
         }
 
-        private List<string> extractVars(string vars)
-        {
-            List<string> l = vars.Split(',').ToList<string>();
-           // l.Reverse();
-            return l;
+        private List<string> extractVars(string vars) {
+            return vars.Split(',').ToList<string>();
         }
     }
 }

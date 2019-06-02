@@ -31,13 +31,18 @@ namespace RESTful_Flight_Simulator.Models
             get { return connected; }
             set { connected = value; }
         }
+
+        public CommandClient()
+        {
+            // Default constructor
+        }
+
         public static CommandClient GetInstance()
         {
-            if (commandClientSingleton == null)
-            {
+            if (commandClientSingleton == null) {
                 commandClientSingleton = new CommandClient();
             }
-
+            // Finally
             return commandClientSingleton;
         }
         public bool ParametersChanged(string _ip, int _port)
@@ -59,10 +64,7 @@ namespace RESTful_Flight_Simulator.Models
             FlightCommandPort = _port;
         }
 
-        public CommandClient()
-        {
-            // Default constructor
-        }
+
 
         public void Connect()
         {

@@ -13,11 +13,9 @@ namespace RESTful_Flight_Simulator
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
             routes.MapRoute(
                 name: "first",
                 url: "{controller}/{action}"
-               
             );
 
             //
@@ -55,33 +53,13 @@ namespace RESTful_Flight_Simulator
             );
 
             /*
-            // for debug 
+            // Debug 
             routes.MapRoute(
                name: "Default",
                url: "{controller}/{action}/{ip}/{port}",
                defaults: new { controller = "display", action = "DisplayLocation", ip = "127.0.0.1", port = 5400 }
            );
-
-            //
-            // Map files
-            //
-
-            // Map saved routes
-            routes.MapRoute(
-               name: "ReturnRoute",
-               url: "{controller}/{file_name}",
-               defaults: new { controller = "save", action = "ReturnContent" }
-           );
-
-            // Map images
-            routes.MapRoute(
-               name: "ReturnImage",
-               url: "{controller}/{image_path}",
-               defaults: new { controller = "files", action = "ReturnImage" }
-           );
            */
-
-
         }
     }
 }

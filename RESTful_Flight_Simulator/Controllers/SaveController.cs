@@ -13,14 +13,13 @@ namespace RESTful_Flight_Simulator.Controllers
         // GET: Save
         public ActionResult SaveRoute(string ip, int port, float interval, int duration, string file)
         {
-            saveModel model = new saveModel(ip, ""+port, file, ""+interval, ""+duration);
-         
+            saveModel model = new saveModel(ip, "" + port, file, "" + interval, "" + duration);
             return View(model);
         }
 
         public String ReturnContent(string file)
         {
-            System.Diagnostics.Debug.WriteLine("Getting file: " + @"../Views/Save/Routes/" + @file);
+            System.Diagnostics.Debug.WriteLine("Getting flight: " + @"../Views/Save/Routes/" + @file);
             return System.IO.File.ReadAllText(@"../Views/Save/Routes/" + @file);
         }
     }
